@@ -13,6 +13,6 @@ https://user-images.githubusercontent.com/22428412/177346016-4ff0eb4b-1e3e-4a14-
 ### Build Instructions
 >clone the repo 
 
->open the project in vs code and open a terminal
+>enter into fc_downloader directory
 
->cargo run "*thread-url*"
+> run "cargo run *thread-url*"
