@@ -7,5 +7,7 @@ Basic four chan thread media downloader. Does nothing more than downloading all 
 
 ### Build Instructions
 >clone the repo 
+
 >open the project in vs code and open a terminal
+
 >cargo run "*thread-url*"
