@@ -1,8 +1,10 @@
 
 use std::fs::File;
+use std::fs;
 use std::io::{copy, Cursor};
 use colored::Colorize;
 use std::time::Instant;
+use std::path::Path;
 
 #[tokio::main]
 async fn main() -> Result<(), reqwest::Error>{
@@ -44,6 +46,20 @@ async fn main() -> Result<(), reqwest::Error>{
     
     let start = Instant::now();
     let mut k:usize = 0;
+
+    let mut path = "Downloads/".to_owned();
+            path.push_str(v[3]);
+            let b : bool = Path::new(&path).is_dir();
+            if !b {
+                fs::create_dir(&path).unwrap();
+            }
+            path.push_str("/");
+            path.push_str(v[5]);
+            let c : bool = Path::new(&path).is_dir();
+            if !c {
+                fs::create_dir(&path).unwrap();
+            }
+            path.push_str("/");
     
     while obj.get(k).is_some(){
         let arr = obj.get(k).expect("empty media data found!");
@@ -66,13 +82,10 @@ async fn main() -> Result<(), reqwest::Error>{
             }
             
             let reesponse = reqwest::get(&endurl).await?;
-            let mut path = "Downloads/".to_owned();
-            // path.push_str(v[3]);
-            // path.push_str("/");
-            // path.push_str(v[5]);
-            // path.push_str("/");
-            path.push_str(&filename);
-            let mut dest = File::create(path).unwrap();
+            
+            let fpath= path.to_string() + &filename;
+            let mut dest = File::create(fpath).unwrap();
+            
             let mut content = Cursor::new(reesponse.bytes().await?);
             copy(&mut content, &mut dest).unwrap();
             println!("{} {} {}",k,format!("->").blue(),filename.cyan());
