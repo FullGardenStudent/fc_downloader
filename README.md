@@ -3,7 +3,7 @@ Basic four chan thread media downloader. Does nothing more than downloading all 
 folder in the same directory. It'll skip downloading if the file with same name already exists.
 
 ## TO DO
-- verify already downloaded files 
+- add some GUI 
 
 ## Usage 
 .\four_chan_downloader.exe "thread-url"
