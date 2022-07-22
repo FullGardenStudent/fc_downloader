@@ -1,5 +1,6 @@
 # fc_downloader
-Basic four chan thread media downloader. Downloads all the media from a thread into the Downloads folder in the appropriate thread catetory and name directories.
+Basic four chan thread media downloader. Does nothing more than downloading all the media from a thread along with their file name into a Downloads 
+folder in the same directory. It'll skip downloading if the file with same name already exists.
 
 ## TO DO
 - verify already downloaded files 

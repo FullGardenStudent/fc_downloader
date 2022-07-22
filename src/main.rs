@@ -55,7 +55,7 @@ async fn main() -> Result<(), reqwest::Error>{
             }
             path.push_str("/");
             path.push_str(v[5]);
-            let c : bool = Path::new(&path).is_dir();
+            let c = Path::new(&path).is_dir();
             if !c {
                 fs::create_dir(&path).unwrap();
             }
@@ -81,14 +81,20 @@ async fn main() -> Result<(), reqwest::Error>{
                 filename.push_str(ext);
             }
             
-            let reesponse = reqwest::get(&endurl).await?;
-            
             let fpath= path.to_string() + &filename;
-            let mut dest = File::create(fpath).unwrap();
+            
+
+            let d = Path::new(&fpath).exists();
+            if d {
+                println!("{} {} File {} already exists!",k,format!("->").blue(),filename.cyan());
+            }else {
+            let mut dest = File::create(&fpath).unwrap();
+            let reesponse = reqwest::get(&endurl).await?;
             
             let mut content = Cursor::new(reesponse.bytes().await?);
             copy(&mut content, &mut dest).unwrap();
             println!("{} {} {}",k,format!("->").blue(),filename.cyan());
+            }
         }
         k=k+1;
     }
